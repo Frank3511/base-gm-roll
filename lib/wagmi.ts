@@ -53,20 +53,6 @@ const anyInjectedWallet = {
   },
 }
 
-const metaMaskWallet = {
-  id: 'metamask',
-  name: 'MetaMask',
-  provider: (windowLike?: Window) =>
-    getInjectedProvider(
-      windowLike,
-      (provider) =>
-        Boolean(provider.isMetaMask) &&
-        !provider.isCoinbaseWallet &&
-        !provider.isOkxWallet &&
-        !provider.isOKExWallet,
-    ),
-}
-
 const okxWallet = {
   id: 'okx',
   name: 'OKX Wallet',
@@ -106,7 +92,6 @@ const trustWallet = {
 
 const injectedTargets = {
   anyInjectedWallet,
-  metaMaskWallet,
   okxWallet,
   rabbyWallet,
   trustWallet,
@@ -147,27 +132,27 @@ export const wagmiConfig = createConfig({
     }),
     injected({
       shimDisconnect: true,
-      unstable_shimAsyncInject: 1_000,
-      target: injectedTargets.metaMaskWallet,
+      unstable_shimAsyncInject: 3_000,
+      target: 'metaMask',
     }),
     injected({
       shimDisconnect: true,
-      unstable_shimAsyncInject: 1_000,
+      unstable_shimAsyncInject: 3_000,
       target: injectedTargets.okxWallet,
     }),
     injected({
       shimDisconnect: true,
-      unstable_shimAsyncInject: 1_000,
+      unstable_shimAsyncInject: 3_000,
       target: injectedTargets.rabbyWallet,
     }),
     injected({
       shimDisconnect: true,
-      unstable_shimAsyncInject: 1_000,
+      unstable_shimAsyncInject: 3_000,
       target: injectedTargets.trustWallet,
     }),
   ],
   dataSuffix,
-  multiInjectedProviderDiscovery: false,
+  multiInjectedProviderDiscovery: true,
   ssr: true,
   transports: {
     [base.id]: http(baseRpcUrl),

@@ -127,22 +127,36 @@ export function GmCounter() {
   })
 
   const walletOptions = useMemo(
-    () =>
-      connectors.filter((connector) => {
+    () => {
+      const seen = new Set<string>()
+
+      return connectors.filter((connector) => {
         const name = connector.name.toLowerCase()
-        return (
+        const id = connector.id.toLowerCase()
+        const walletKey = name.includes('coinbase')
+          ? 'coinbase'
+          : name.includes('metamask') || id.includes('metamask')
+            ? 'metamask'
+            : id
+        const supported =
           name.includes('coinbase') ||
+          name.includes('metamask') ||
           [
             'coinbaseWallet',
             'coinbaseWalletSDK',
             'browser-wallet',
             'metamask',
+            'metaMask',
             'okx',
             'rabby',
             'trust',
           ].includes(connector.id)
-        )
-      }),
+        if (!supported || seen.has(walletKey)) return false
+
+        seen.add(walletKey)
+        return true
+      })
+    },
     [connectors],
   )
 
@@ -364,18 +378,25 @@ export function GmCounter() {
                 const isCoinbase =
                   connector.name.toLowerCase().includes('coinbase') ||
                   connector.id.toLowerCase().includes('coinbase')
+                const isMetaMask =
+                  connector.name.toLowerCase().includes('metamask') ||
+                  connector.id.toLowerCase().includes('metamask')
                 const copy = isCoinbase
                   ? walletCopy.coinbaseWallet
+                  : isMetaMask
+                    ? walletCopy.metamask
                   : (walletCopy[connector.id] ?? {
                       label: connector.name,
                       hint: connector.id,
                     })
                 const detected =
                   isCoinbase ||
+                  isMetaMask ||
                   connector.id === 'browser-wallet' ||
                   Boolean(connector.provider)
                 const unavailable =
                   !isCoinbase &&
+                  !isMetaMask &&
                   connector.id !== 'browser-wallet' &&
                   !connector.provider
 
