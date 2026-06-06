@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "Base GM Roll",
+    "iconUrl": "https://base-gm-roll.vercel.app/favicon.svg",
+    "homeUrl": "https://base-gm-roll.vercel.app",
+    "imageUrl": "https://base-gm-roll.vercel.app/og.png",
+    "buttonTitle": "Say GM",
+    "splashImageUrl": "https://base-gm-roll.vercel.app/favicon.svg",
+    "splashBackgroundColor": "#fffaf0",
+    "webhookUrl": "https://base-gm-roll.vercel.app/api/webhook"
+  }
+}

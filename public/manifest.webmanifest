@@ -1,0 +1,16 @@
+{
+  "name": "Base GM Roll",
+  "short_name": "GM Roll",
+  "description": "An onchain GM counter mini app on Base.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffaf0",
+  "theme_color": "#0052ff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
