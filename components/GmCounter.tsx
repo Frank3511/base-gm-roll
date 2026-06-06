@@ -42,6 +42,33 @@ const shortAddress = (address?: string) =>
 const shortHash = (hash?: string) =>
   hash ? `${hash.slice(0, 10)}...${hash.slice(-8)}` : 'No transaction yet'
 
+const walletCopy: Record<string, { label: string; hint: string }> = {
+  coinbaseWallet: {
+    label: 'Coinbase Wallet',
+    hint: 'External Coinbase Wallet connection',
+  },
+  'browser-wallet': {
+    label: 'Base App / Browser Wallet',
+    hint: 'Uses the wallet injected into this browser',
+  },
+  metamask: {
+    label: 'MetaMask',
+    hint: 'Uses the MetaMask injected provider',
+  },
+  okx: {
+    label: 'OKX Wallet',
+    hint: 'Uses the OKX injected provider',
+  },
+  rabby: {
+    label: 'Rabby Wallet',
+    hint: 'Uses the Rabby injected provider',
+  },
+  trust: {
+    label: 'Trust Wallet',
+    hint: 'Uses the Trust Wallet injected provider',
+  },
+}
+
 export function GmCounter() {
   const [walletOpen, setWalletOpen] = useState(false)
   const [actionState, setActionState] = useState<ActionState>(
@@ -96,8 +123,19 @@ export function GmCounter() {
   const walletOptions = useMemo(
     () =>
       connectors.filter((connector) => {
-        const id = connector.id.toLowerCase()
-        return id.includes('coinbase') || id.includes('injected')
+        const name = connector.name.toLowerCase()
+        return (
+          name.includes('coinbase') ||
+          [
+            'coinbaseWallet',
+            'coinbaseWalletSDK',
+            'browser-wallet',
+            'metamask',
+            'okx',
+            'rabby',
+            'trust',
+          ].includes(connector.id)
+        )
       }),
     [connectors],
   )
@@ -304,22 +342,41 @@ export function GmCounter() {
             </div>
 
             <div className="grid gap-3 p-4">
-              {walletOptions.map((connector) => (
-                <button
-                  type="button"
-                  key={connector.uid}
-                  disabled={connecting}
-                  onClick={() => connect({ connector })}
-                  className="grid gap-1 rounded-md border border-[#24211c] bg-[#fffaf0] p-3 text-left transition hover:-translate-y-0.5 disabled:opacity-60"
-                >
-                  <span className="font-extrabold text-[#24211c]">
-                    {connector.name}
-                  </span>
-                  <small className="font-mono text-[11px] font-bold leading-none text-[#7a7165]">
-                    {connector.id}
-                  </small>
-                </button>
-              ))}
+              {walletOptions.map((connector) => {
+                const isCoinbase =
+                  connector.name.toLowerCase().includes('coinbase') ||
+                  connector.id.toLowerCase().includes('coinbase')
+                const copy = isCoinbase
+                  ? walletCopy.coinbaseWallet
+                  : (walletCopy[connector.id] ?? {
+                      label: connector.name,
+                      hint: connector.id,
+                    })
+                const unavailable =
+                  !isCoinbase &&
+                  connector.id !== 'browser-wallet' &&
+                  !connector.provider
+
+                return (
+                  <button
+                    type="button"
+                    key={connector.uid}
+                    disabled={connecting || unavailable}
+                    onClick={() => connect({ connector })}
+                    className="grid gap-1 rounded-md border border-[#24211c] bg-[#fffaf0] p-3 text-left transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                  >
+                    <span className="flex items-center justify-between gap-3 font-extrabold text-[#24211c]">
+                      {copy.label}
+                      <span className="font-mono text-[10px] uppercase text-[#0052ff]">
+                        {unavailable ? 'Not detected' : 'Available'}
+                      </span>
+                    </span>
+                    <small className="font-mono text-[11px] font-bold leading-tight text-[#7a7165]">
+                      {copy.hint}
+                    </small>
+                  </button>
+                )
+              })}
             </div>
           </div>
         </div>
