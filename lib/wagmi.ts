@@ -20,7 +20,10 @@ type WalletProvider = EIP1193Provider & {
 }
 
 type WalletWindow = Window & {
+  coinbaseWalletExtension?: WalletProvider
   ethereum?: WalletProvider
+  okxwallet?: WalletProvider
+  trustwallet?: WalletProvider
 }
 
 type InjectedTarget = Exclude<InjectedParameters['target'], string | undefined>
@@ -39,8 +42,15 @@ function getInjectedProvider(
 const anyInjectedWallet = {
   id: 'browser-wallet',
   name: 'Base App / Browser Wallet',
-  provider: (windowLike?: Window) =>
-    (windowLike as WalletWindow | undefined)?.ethereum,
+  provider: (windowLike?: Window) => {
+    const walletWindow = windowLike as WalletWindow | undefined
+    return (
+      walletWindow?.ethereum ??
+      walletWindow?.coinbaseWalletExtension ??
+      walletWindow?.okxwallet ??
+      walletWindow?.trustwallet
+    )
+  },
 }
 
 const metaMaskWallet = {
@@ -60,11 +70,16 @@ const metaMaskWallet = {
 const okxWallet = {
   id: 'okx',
   name: 'OKX Wallet',
-  provider: (windowLike?: Window) =>
-    getInjectedProvider(
+  provider: (windowLike?: Window) => {
+    const walletWindow = windowLike as WalletWindow | undefined
+    return (
+      walletWindow?.okxwallet ??
+      getInjectedProvider(
       windowLike,
       (provider) => Boolean(provider.isOkxWallet || provider.isOKExWallet),
-    ),
+      )
+    )
+  },
 }
 
 const rabbyWallet = {
@@ -77,11 +92,16 @@ const rabbyWallet = {
 const trustWallet = {
   id: 'trust',
   name: 'Trust Wallet',
-  provider: (windowLike?: Window) =>
-    getInjectedProvider(
+  provider: (windowLike?: Window) => {
+    const walletWindow = windowLike as WalletWindow | undefined
+    return (
+      walletWindow?.trustwallet ??
+      getInjectedProvider(
       windowLike,
       (provider) => Boolean(provider.isTrust || provider.isTrustWallet),
-    ),
+      )
+    )
+  },
 }
 
 const injectedTargets = {
@@ -122,22 +142,27 @@ export const wagmiConfig = createConfig({
     }),
     injected({
       shimDisconnect: true,
+      unstable_shimAsyncInject: 1_000,
       target: injectedTargets.anyInjectedWallet,
     }),
     injected({
       shimDisconnect: true,
+      unstable_shimAsyncInject: 1_000,
       target: injectedTargets.metaMaskWallet,
     }),
     injected({
       shimDisconnect: true,
+      unstable_shimAsyncInject: 1_000,
       target: injectedTargets.okxWallet,
     }),
     injected({
       shimDisconnect: true,
+      unstable_shimAsyncInject: 1_000,
       target: injectedTargets.rabbyWallet,
     }),
     injected({
       shimDisconnect: true,
+      unstable_shimAsyncInject: 1_000,
       target: injectedTargets.trustWallet,
     }),
   ],

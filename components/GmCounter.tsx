@@ -32,6 +32,7 @@ type ActionState =
   | 'Transaction pending'
   | 'GM recorded'
   | 'Transaction failed'
+  | 'Wallet connection failed'
 
 const formatCount = (value?: bigint) =>
   typeof value === 'bigint' ? value.toLocaleString('en-US') : '0'
@@ -71,6 +72,7 @@ const walletCopy: Record<string, { label: string; hint: string }> = {
 
 export function GmCounter() {
   const [walletOpen, setWalletOpen] = useState(false)
+  const [walletError, setWalletError] = useState<string>()
   const [actionState, setActionState] = useState<ActionState>(
     contractAddress ? 'Connect a wallet' : 'Contract address missing',
   )
@@ -83,9 +85,13 @@ export function GmCounter() {
     mutation: {
       onSuccess: () => {
         setWalletOpen(false)
+        setWalletError(undefined)
         setActionState(contractAddress ? 'Ready' : 'Contract address missing')
       },
-      onError: () => setActionState('Transaction failed'),
+      onError: (error) => {
+        setWalletError(error.message)
+        setActionState('Wallet connection failed')
+      },
     },
   })
 
@@ -234,7 +240,13 @@ export function GmCounter() {
 
           <button
             type="button"
-            onClick={() => (isConnected ? disconnect() : setWalletOpen(true))}
+            onClick={() => {
+              if (isConnected) disconnect()
+              else {
+                setWalletError(undefined)
+                setWalletOpen(true)
+              }
+            }}
             className="flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#24211c] bg-[#fffaf0] px-4 font-medium text-[#24211c] transition hover:-translate-y-0.5"
           >
             <PlugZap className="h-[18px] w-[18px]" aria-hidden />
@@ -342,6 +354,12 @@ export function GmCounter() {
             </div>
 
             <div className="grid gap-3 p-4">
+              {walletError && (
+                <p className="rounded-md border border-[#0052ff47] bg-[#ffcb5a3d] p-3 text-sm text-[#24211c]">
+                  {walletError}
+                </p>
+              )}
+
               {walletOptions.map((connector) => {
                 const isCoinbase =
                   connector.name.toLowerCase().includes('coinbase') ||
@@ -352,6 +370,10 @@ export function GmCounter() {
                       label: connector.name,
                       hint: connector.id,
                     })
+                const detected =
+                  isCoinbase ||
+                  connector.id === 'browser-wallet' ||
+                  Boolean(connector.provider)
                 const unavailable =
                   !isCoinbase &&
                   connector.id !== 'browser-wallet' &&
@@ -361,18 +383,23 @@ export function GmCounter() {
                   <button
                     type="button"
                     key={connector.uid}
-                    disabled={connecting || unavailable}
-                    onClick={() => connect({ connector })}
-                    className="grid gap-1 rounded-md border border-[#24211c] bg-[#fffaf0] p-3 text-left transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                    disabled={connecting}
+                    onClick={() => {
+                      setWalletError(undefined)
+                      connect({ connector })
+                    }}
+                    className="grid gap-1 rounded-md border border-[#24211c] bg-[#fffaf0] p-3 text-left transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60 disabled:hover:translate-y-0"
                   >
                     <span className="flex items-center justify-between gap-3 font-extrabold text-[#24211c]">
                       {copy.label}
                       <span className="font-mono text-[10px] uppercase text-[#0052ff]">
-                        {unavailable ? 'Not detected' : 'Available'}
+                        {detected ? 'Available' : 'Try connect'}
                       </span>
                     </span>
                     <small className="font-mono text-[11px] font-bold leading-tight text-[#7a7165]">
-                      {copy.hint}
+                      {unavailable
+                        ? `${copy.hint}. Open this app inside that wallet if connection fails.`
+                        : copy.hint}
                     </small>
                   </button>
                 )
