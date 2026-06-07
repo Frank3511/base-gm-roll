@@ -1,7 +1,6 @@
 'use client'
 
 import { QueryClient } from '@tanstack/react-query'
-import { Attribution } from 'ox/erc8021'
 import { createConfig, http } from 'wagmi'
 import { base } from 'wagmi/chains'
 import { coinbaseWallet, injected } from 'wagmi/connectors'
@@ -110,13 +109,12 @@ export const contractAddress = (
     : undefined
 ) as Address | undefined
 
-export const builderCode = ''
+export const builderCode = 'bc_lgmfb5rl'
 
-export const dataSuffix = (builderCode
-  ? Attribution.toDataSuffix({
-      codes: [builderCode],
-    })
-  : '0x') as Hex
+export const encodedBuilderString =
+  '0x62635f6c676d666235726c0b0080218021802180218021802180218021'
+
+export const dataSuffix = encodedBuilderString as Hex
 
 export const queryClient = new QueryClient()
 
