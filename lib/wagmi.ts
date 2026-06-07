@@ -100,11 +100,13 @@ const injectedTargets = {
 export const baseRpcUrl =
   process.env.NEXT_PUBLIC_BASE_RPC_URL || 'https://mainnet.base.org'
 
+const defaultContractAddress = '0x8801EF397749D830Ac19515a11bD1f50BC19F546'
+
 export const contractAddress = (
   /^0x[a-fA-F0-9]{40}$/.test(
-    process.env.NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS ?? '',
+    process.env.NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS ?? defaultContractAddress,
   )
-    ? process.env.NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS
+    ? process.env.NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS ?? defaultContractAddress
     : undefined
 ) as Address | undefined
 

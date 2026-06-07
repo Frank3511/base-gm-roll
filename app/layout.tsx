@@ -6,7 +6,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta name="base:app_id" content="[填写 base.dev Verify token]" />
+        <meta name="base:app_id" content="6a24ea7195cfa95c11629b7a" />
+        <meta
+          name="talentapp:project_verification"
+          content="162840bcca14ba96e9ba926da7b470cec1d22efdc3629458b21d57077e05618c6122a5983be33da0deafbeaf5117a4b5984cc3de39e2215514b2156c67125497"
+        />
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="theme-color" content="#0052ff" />
         <meta
