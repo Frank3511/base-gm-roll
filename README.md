@@ -50,3 +50,12 @@ npm install
 Create a local environment file:
 
 ```bash
+cp .env.example .env.local
+```
+
+Set the required environment variables:
+
+```bash
+NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS=0x...
+NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
+```
