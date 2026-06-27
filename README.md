@@ -15,3 +15,12 @@ There are no purchases, rewards, points, invite systems, leaderboards, fees, or 
 Users only pay Base gas for their own transaction.
 
 ## Features
+
+- Connect a wallet on Base.
+- Press **Say GM** to submit an onchain GM.
+- Read the connected wallet's GM count from `userGMs(address)`.
+- Read the global GM count from `totalGMs()`.
+- Display transaction progress and result state.
+- Keep the app intentionally simple and contract-driven.
+
+## Stack
