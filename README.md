@@ -24,3 +24,12 @@ Users only pay Base gas for their own transaction.
 - Keep the app intentionally simple and contract-driven.
 
 ## Stack
+
+- Next.js
+- TypeScript
+- App Router
+- Wagmi
+- Viem
+- Tailwind CSS
+
+## Getting Started
