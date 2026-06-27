@@ -33,3 +33,10 @@ Users only pay Base gas for their own transaction.
 - Tailwind CSS
 
 ## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Frank3511/base-gm-roll.git
+cd base-gm-roll
+```
