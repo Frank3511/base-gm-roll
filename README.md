@@ -40,3 +40,13 @@ Clone the repository:
 git clone https://github.com/Frank3511/base-gm-roll.git
 cd base-gm-roll
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a local environment file:
+
+```bash
