@@ -59,3 +59,11 @@ Set the required environment variables:
 NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS=0x...
 NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
 ```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build the app:
