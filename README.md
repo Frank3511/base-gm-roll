@@ -42,3 +42,12 @@ The app also displays wallet connection status and the latest transaction state 
 - Tailwind CSS
 
 ## Repository
+
+```bash
+git clone https://github.com/Frank3511/base-gm-roll.git
+cd base-gm-roll
+```
+
+## Getting Started
+
+Install the project dependencies:
