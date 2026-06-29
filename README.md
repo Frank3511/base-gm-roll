@@ -114,3 +114,11 @@ NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
 ```
 
 ## Contract Reads
+
+BaseGMRoll reads directly from the contract for the displayed counts.
+
+The connected wallet count is read from:
+
+```solidity
+userGMs(address)
+```
