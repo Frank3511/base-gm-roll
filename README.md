@@ -68,3 +68,13 @@ Set the required environment variables in `.env.local`:
 NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS=0x...
 NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
 ```
+
+Replace `0x...` with the deployed `BaseGMRoll` contract address.
+
+## Development
+
+Start the local development server:
+
+```bash
+npm run dev
+```
