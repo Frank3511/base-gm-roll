@@ -78,3 +78,11 @@ Start the local development server:
 ```bash
 npm run dev
 ```
+
+Then open the local Next.js development URL in your browser.
+
+Make sure your wallet is connected to Base before using the app. If the wallet is connected to a different network, switch to Base before submitting a GM transaction.
+
+## Build
+
+Create a production build:
