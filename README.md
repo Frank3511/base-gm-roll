@@ -16,3 +16,12 @@ The main flow is:
 
 1. Connect a wallet on Base.
 2. Press **Say GM**.
+3. Confirm the transaction in the connected wallet.
+4. Wait for the transaction state to update.
+5. View the connected wallet's GM count and the global GM count.
+
+The app also displays wallet connection status and the latest transaction state so users can understand what is happening during the interaction.
+
+## Features
+
+- Connect a wallet on Base.
