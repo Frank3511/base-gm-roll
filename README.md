@@ -122,3 +122,13 @@ The connected wallet count is read from:
 ```solidity
 userGMs(address)
 ```
+
+The global count is read from:
+
+```solidity
+totalGMs()
+```
+
+## Contract Write
+
+When a user presses **Say GM**, the app sends a transaction that calls:
