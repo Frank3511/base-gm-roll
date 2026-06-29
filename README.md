@@ -140,3 +140,12 @@ sayGM()
 The user must confirm the transaction in their wallet. The transaction requires Base gas and updates according to the connected wallet and network state.
 
 ## Usage Notes
+
+- The app is designed for Base.
+- Users pay only the gas required for their own transaction.
+- There are no built-in purchases or paid app actions.
+- There are no rewards, points, invite systems, or leaderboards.
+- Counts are sourced from the contract rather than from an offchain database.
+- Transaction timing depends on the connected wallet, RPC response, and Base network conditions.
+
+## Project Structure
