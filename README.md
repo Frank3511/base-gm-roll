@@ -96,3 +96,12 @@ Start the production server after building:
 ```bash
 npm start
 ```
+
+## Environment Variables
+
+The app expects the following public environment variables:
+
+| Variable | Description |
+| --- | --- |
+| `NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS` | Address of the deployed `BaseGMRoll` contract |
+| `NEXT_PUBLIC_BASE_RPC_URL` | RPC URL used to read from Base |
