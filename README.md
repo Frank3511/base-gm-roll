@@ -25,3 +25,11 @@ The app also displays wallet connection status and the latest transaction state 
 ## Features
 
 - Connect a wallet on Base.
+- Submit an onchain GM by calling `sayGM()`.
+- Read the connected wallet's GM count from `userGMs(address)`.
+- Read the global GM count from `totalGMs()`.
+- Display wallet connection status.
+- Display transaction progress and result state.
+- Keep the app intentionally simple and focused on the contract.
+
+## Tech Stack
