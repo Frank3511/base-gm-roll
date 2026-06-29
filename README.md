@@ -132,3 +132,11 @@ totalGMs()
 ## Contract Write
 
 When a user presses **Say GM**, the app sends a transaction that calls:
+
+```solidity
+sayGM()
+```
+
+The user must confirm the transaction in their wallet. The transaction requires Base gas and updates according to the connected wallet and network state.
+
+## Usage Notes
