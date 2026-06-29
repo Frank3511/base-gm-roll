@@ -167,3 +167,12 @@ If the app does not show contract data, check that:
 - The development server was restarted after changing environment variables.
 
 If a transaction does not complete, check that:
+
+- The wallet has enough ETH on Base to pay gas.
+- The transaction was confirmed in the wallet.
+- The connected network is Base.
+- The RPC endpoint is responding correctly.
+
+## License
+
+No license information is specified in the original project README.
