@@ -33,3 +33,12 @@ The app also displays wallet connection status and the latest transaction state 
 - Keep the app intentionally simple and focused on the contract.
 
 ## Tech Stack
+
+- Next.js
+- TypeScript
+- App Router
+- Wagmi
+- Viem
+- Tailwind CSS
+
+## Repository
