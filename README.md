@@ -51,3 +51,12 @@ cd base-gm-roll
 ## Getting Started
 
 Install the project dependencies:
+
+```bash
+npm install
+```
+
+Create a local environment file:
+
+```bash
+cp .env.example .env.local
