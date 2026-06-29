@@ -105,3 +105,12 @@ The app expects the following public environment variables:
 | --- | --- |
 | `NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS` | Address of the deployed `BaseGMRoll` contract |
 | `NEXT_PUBLIC_BASE_RPC_URL` | RPC URL used to read from Base |
+
+Example:
+
+```bash
+NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS=0x...
+NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
+```
+
+## Contract Reads
