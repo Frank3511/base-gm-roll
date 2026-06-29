@@ -157,3 +157,13 @@ Tailwind CSS is used for styling.
 Wagmi and Viem are used for wallet, contract read, and contract write interactions.
 
 ## Troubleshooting
+
+If the app does not show contract data, check that:
+
+- `NEXT_PUBLIC_BASE_GM_ROLL_ADDRESS` is set correctly.
+- `NEXT_PUBLIC_BASE_RPC_URL` points to a working Base RPC endpoint.
+- The connected wallet is on Base.
+- The contract address matches the intended deployed contract.
+- The development server was restarted after changing environment variables.
+
+If a transaction does not complete, check that:
