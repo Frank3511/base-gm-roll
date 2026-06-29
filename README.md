@@ -149,3 +149,11 @@ The user must confirm the transaction in their wallet. The transaction requires 
 - Transaction timing depends on the connected wallet, RPC response, and Base network conditions.
 
 ## Project Structure
+
+The project uses the Next.js App Router with TypeScript.
+
+Tailwind CSS is used for styling.
+
+Wagmi and Viem are used for wallet, contract read, and contract write interactions.
+
+## Troubleshooting
