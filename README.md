@@ -86,3 +86,13 @@ Make sure your wallet is connected to Base before using the app. If the wallet i
 ## Build
 
 Create a production build:
+
+```bash
+npm run build
+```
+
+Start the production server after building:
+
+```bash
+npm start
+```
